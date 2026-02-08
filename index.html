@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Betu ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #2b1d1d; /* Deep Dark Chocolate */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Chocolate Luxury Background Pattern */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#4e342e 15%, transparent 16%);
+            background-size: 30px 30px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        /* Glassmorphism Card */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 90%;
+            width: 400px;
+            background: rgba(255, 255, 255, 0.1); /* Frosted Glass */
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 204, 128, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: #ffcc80; /* Gold Text */
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #3e2723;
+        }
+
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: #efebe9;
+        }
+
+        /* --- BUTTON STYLES --- */
+        .btn {
+            border: none;
+            padding: 14px 15px;
+            font-size: 0.95rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            position: relative;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn:active { transform: translateY(3px); box-shadow: none; }
+
+        /* Tricky Button (Chocolate) */
+        .btn-choco {
+            background: linear-gradient(135deg, #d7ccc8, #bcaaa4); /* Milky */
+            color: #3e2723;
+            border: 2px solid #5d4037;
+        }
+
+        /* Correct Button (Gold) */
+        .btn-correct {
+            background: linear-gradient(135deg, #ffcc80, #ffb74d); /* Gold */
+            color: #3e2723;
+            opacity: 0.5; /* Locked initially */
+            pointer-events: none; /* Unclickable initially */
+            filter: grayscale(0.5);
+        }
+
+        /* When Unlocked */
+        .btn-correct.unlocked {
+            opacity: 1;
+            pointer-events: auto;
+            filter: grayscale(0);
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 15px rgba(255, 204, 128, 0.5);
+        }
+
+        /* WhatsApp Button */
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #075E54;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        /* Funny Comments Box */
+        .comment-box {
+            background: #fff;
+            color: #d32f2f;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: none; /* Hidden initially */
+            border-left: 5px solid #d32f2f;
+            animation: popIn 0.5s;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Scanner Bar */
+        .loader-box {
+            width: 100%;
+            height: 8px;
+            background: #3e2723;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .loader-bar {
+            height: 100%;
+            width: 0%;
+            background: #ffcc80;
+            transition: width 0.1s;
+        }
+
+        .hidden { display: none; }
+
+        /* Golden Ticket */
+        .ticket {
+            background: #fff8e1;
+            border: 2px dashed #3e2723;
+            padding: 15px;
+            transform: rotate(-2deg);
+            margin-top: 15px;
+            color: #3e2723;
+            position: relative;
+        }
+        .ticket::before, .ticket::after {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            background: #2b1d1d;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .ticket::before { left: -10px; }
+        .ticket::after { right: -10px; }
+
+        /* Photo Styles (Polaroids) */
+        .photo-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .choco-photo {
+            width: 120px;
+            height: auto;
+            border-radius: 8px;
+            border: 4px solid #fff;
+            border-bottom: 15px solid #fff; /* Polaroid Look */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            transform: rotate(-3deg);
+            transition: transform 0.3s;
+        }
+        .choco-photo:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 15;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-pattern"></div>
+
+    <audio id="bgMusic" loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        
+        <div id="step0">
+            <div style="font-size: 3rem;">🕵️‍♀️</div>
+            <h2>Identity Check...</h2>
+            <p>Scanning for: <b>Betu</b></p>
+            <div class="loader-box">
+                <div class="loader-bar" id="bar"></div>
+            </div>
+            <p id="scan-text" style="font-size: 0.9rem;">Initializing...</p>
+        </div>
+
+        <div id="step0a" class="hidden">
+            <h1>Wait a second! ✋</h1>
+            <p>Before we start the game, I found photographic proof of your sweetness...</p>
+            <button class="btn btn-correct unlocked" onclick="startMusicAndNext()">Show me the proof! 👀</button>
+        </div>
+
+        <div id="step0b" class="hidden">
+            <h1>Caught Red Handed! 🍫</h1>
+            <p>Look how cute you are enjoying chocolate! 🥰</p>
+
+            <div class="photo-container">
+                <img src="image_10.png" alt="Betu eating chocolate 1" class="choco-photo">
+                <img src="image_11.png" alt="Betu eating chocolate 2" class="choco-photo" style="transform: rotate(3deg);">
+            </div>
+
+            <p>Okay, now let's play the game!</p>
+            <button class="btn btn-correct unlocked" onclick="nextStep(1)">Start Level 1 🎮</button>
+        </div>
+
+
+        <div id="step1" class="hidden">
+            <h1>Level 1 🍬</h1>
+            <p>What is the sweetest thing here?</p>
+            
+            <button class="btn btn-choco" onclick="unlockNext('1', 'Tastes rich... but not sweeter than you! 😜 Now click the real answer 👇')">Ferrero Rocher 🌰</button>
+            <div id="comment1" class="comment-box"></div>
+            <button id="btn1" class="btn btn-correct" onclick="nextStep(2)">My Betu 🥰</button>
+        </div>
+
+        <div id="step2" class="hidden">
+            <h1>Level 2 🍦</h1>
+            <p>What is the best late-night craving?</p>
+            
+            <button class="btn btn-choco" onclick="unlockNext('2', 'Yummy & Cold... but Guplu is Hot & Forever! 🔥 Try again 👇')">Amul Choco Chip Ice Cream 🍨</button>
+            <div id="comment2" class="comment-box"></div>
+            <button id="btn2" class="btn btn-correct" onclick="nextStep(3)">Guplu's Love ❤️</button>
+        </div>
+
+        <div id="step3" class="hidden">
+            <h1>Level 3 🍫</h1>
+            <p>What fixes your mood instantly?</p>
+            
+            <button class="btn btn-choco" onclick="unlockNext('3', 'Too bitter! 😖 Guplu is sweet (mostly). Click below 👇')">Dark Chocolate 🍫</button>
+            <div id="comment3" class="comment-box"></div>
+            <button id="btn3" class="btn btn-correct" onclick="nextStep(4)">Guplu's Magic 🤗</button>
+        </div>
+
+        <div id="step4" class="hidden">
+            <h1>Level 4 🥛</h1>
+            <p>Only one bar left... What happens?</p>
+            
+            <button class="btn btn-choco" onclick="unlockNext('4', 'Akele akele KitKat? No way! 😤 Share karna padega! 👇')">I eat KitKat Dark alone 🤐</button>
+            <div id="comment4" class="comment-box"></div>
+            <button id="btn4" class="btn btn-correct" onclick="nextStep(5)">Share Milky Bar with Guplu 🍼</button>
+        </div>
+
+        <div id="step5" class="hidden">
+            <h1>You Won! 🎉</h1>
+            <p>See? You are better than any chocolate.<br>Here is your reward!</p>
+            <div style="font-size: 5rem; cursor: pointer; animation: bounce 2s infinite;" onclick="openGift()">🎁</div>
+            <p>(Tap to Open)</p>
+        </div>
+
+        <div id="step6" class="hidden">
+            <h1>The Sweetest Deal 💄</h1>
+            <p>Chocolates bring sweetness...<br>But Makeup brings Sunshine! ☀️✨<br><br>Use this coupon to buy what you love:</p>
+            
+            <div class="ticket">
+                <small style="letter-spacing: 2px;">GUPLU'S CREDIT CARD</small>
+                
+                <h2 id="finalCode" style="margin: 10px 0; font-family: monospace; color: #d32f2f; font-size: 1.5rem;">GUPLU-PAY-MY-CART</h2>
+                
+                <small>Unlimited Validity ❤️</small>
+            </div>
+
+            <button class="btn btn-whatsapp" style="margin-top:20px;" onclick="shareOnWhatsApp()">Send to Guplu & Clear Cart 💬</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- 1. SCANNER ANIMATION ---
+        window.onload = function() {
+            let width = 0;
+            let bar = document.getElementById("bar");
+            let txt = document.getElementById("scan-text");
+            let interval = setInterval(() => {
+                width += 2;
+                bar.style.width = width + "%";
+                if(width === 50) txt.innerText = "Verifying Betu...";
+                if(width === 90) txt.innerText = "Sweetness Detected! 🍯";
+                if(width >= 100) {
+                    clearInterval(interval);
+                    // Go to the photo tease step
+                    setTimeout(() => nextStep('0a'), 800);
+                }
+            }, 30);
+        };
+
+        // --- 2. MUSIC + NAVIGATION ---
+        function startMusicAndNext() {
+            var music = document.getElementById("bgMusic");
+            music.volume = 0.5;
+            music.play().catch(error => console.log("Audio play failed"));
+            nextStep('0b');
+        }
+
+        function nextStep(id) {
+            document.querySelectorAll('div[id^="step"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('step' + id).classList.remove('hidden');
+        }
+
+        // --- 3. THE TRICKY GAME LOGIC ---
+        function unlockNext(levelId, message) {
+            // Show the funny comment
+            let commentBox = document.getElementById('comment' + levelId);
+            commentBox.style.display = 'block';
+            commentBox.innerText = message;
+
+            // Unlock the correct button
+            let correctBtn = document.getElementById('btn' + levelId);
+            correctBtn.classList.add('unlocked');
+            correctBtn.innerText = correctBtn.innerText.replace(" 🥰", "") + " (Unlocked! ✅)";
+        }
+
+        // --- 4. UNBOXING ANIMATION ---
+        function openGift() {
+            // Rain effect (Hearts, Lipstick, Chocolate, Sun)
+            for(let i=0; i<40; i++) {
+                let d = document.createElement('div');
+                let emojis = ['🍫', '❤️', '💄', '✨', '☀️'];
+                d.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                d.style.position = 'absolute';
+                d.style.left = Math.random() * 100 + 'vw';
+                d.style.top = '-20px';
+                d.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                d.style.animation = `fall ${Math.random()*2+2}s linear`;
+                document.body.appendChild(d);
+            }
+            setTimeout(() => nextStep(6), 1000);
+        }
+
+        // --- 5. WHATSAPP SHARE LOGIC ---
+        function shareOnWhatsApp() {
+            const text = "Hey Guplu! I passed the Sweetness Test! 🍫 You said I bring Sunshine, so now it's your turn! Here is my coupon: *GUPLU-PAY-MY-CART*. Ready to pay for my Makeup? 💄✨";
+            const encodedText = encodeURIComponent(text);
+            window.location.href = `https://wa.me/?text=${encodedText}`;
+        }
+
+        // CSS for Rain Animation
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes fall { to { transform: translateY(100vh) rotate(360deg); } } @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-15px);} }`;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
